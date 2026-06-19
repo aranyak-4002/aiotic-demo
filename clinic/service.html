@@ -46,7 +46,7 @@
             <div data-collapse="medium" data-animation="default" data-duration="400" fs-scrolldisable-element="smart-nav" data-easing="ease" data-easing2="ease" role="banner" class="navbar_wrap w-nav">
                 <div class="navbar_container">
                     <a href="index.html" class="navbar_logo w-nav-brand">
-                        <img loading="eager" src="assets/img/lumora-logo-dark.svg" alt="Lumora logo" class="logo_image"/>
+                        <span id="demo-nav-logo" style="font-family:Sora,sans-serif;font-size:18px;font-weight:700;color:#ffffff;letter-spacing:-0.3px;">Lumora Dental</span>
                     </a>
                     <div class="navbar-content_wrap">
                         <nav role="navigation" class="navbar_menu w-nav-menu">
@@ -795,7 +795,7 @@
                     <div class="container">
                         <div data-w-id="a1b41f4f-e78b-52e6-2492-2ff9a80f251e" class="footer_header">
                             <a id="w-node-_69a072d1-69e6-8783-2548-858b3e84bf4f-4af74ce9" href="index.html" class="footer_brand w-inline-block">
-                                <img src="assets/img/lumora-logo-dark.svg" loading="lazy" alt="Lumora logo" class="brand_logo"/>
+                                <span id="demo-footer-logo" style="font-family:Sora,sans-serif;font-size:20px;font-weight:700;color:#ffffff;letter-spacing:-0.3px;">Lumora Dental</span>
                             </a>
                             <div class="footer-contact_wrap">
                                 <a href="tel:+91 9307512816" class="footer-contact_link w-inline-block">
@@ -910,11 +910,10 @@
                         <div data-w-id="c179c474-dbf0-a107-6eba-5d7b4af74d6f" class="footer_bottom">
                             <div class="footer-bottom_element">
                                 <div class="text-color-dark">
-                                    &copy; 2026 Lumora Dental. Crafted by RapidXAI
-                                    .
+                                    <span id="demo-copyright">&copy; 2026 Lumora Dental</span>. Aiotic Technologies
                                 </div>
                                 <div class="footer-bottom_right">
-                                    <div class="text-color-dark">
+                                    <div class="text-color-dark" id="demo-copyright-2">
                                         &copy; 2026 Lumora Dental
                                     </div>
                                     <div class="footer-bottom_right-divider"></div>
@@ -1045,5 +1044,6 @@
   document.querySelectorAll('img').forEach(bind);
 })();
 </script>
+    <script src="demo-params.js"></script>
 </body>
 </html>

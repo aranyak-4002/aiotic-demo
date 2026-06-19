@@ -1,5 +1,14 @@
 (function () {
   var params = new URLSearchParams(window.location.search);
+  var STORE_KEY = 'aiotic_demo_params';
+
+  // Save to sessionStorage when params are in URL; restore on subsequent pages
+  if (params.toString()) {
+    sessionStorage.setItem(STORE_KEY, params.toString());
+  } else {
+    var stored = sessionStorage.getItem(STORE_KEY);
+    if (stored) params = new URLSearchParams(stored);
+  }
 
   var cfg = {
     name:    params.get('name')   || 'Your Clinic Name',
