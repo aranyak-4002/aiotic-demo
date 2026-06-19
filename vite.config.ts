@@ -11,8 +11,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        coaching: resolve(__dirname, 'coaching/index.html'),
-        'interior-design': resolve(__dirname, 'interior-design/index.html'),
+'interior-design': resolve(__dirname, 'interior-design/index.html'),
         'interior-premium': resolve(__dirname, 'interior-premium/index.html'),
         'real-estate': resolve(__dirname, 'real-estate/index.html'),
       },
