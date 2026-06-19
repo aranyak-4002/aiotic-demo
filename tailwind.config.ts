@@ -12,6 +12,8 @@ export default {
         playfair: ['"Playfair Display"', 'serif'],
         inter: ['Inter', 'sans-serif'],
         cormorant: ['"Cormorant Garamond"', 'serif'],
+        sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+        serif: ['"DM Serif Display"', 'Georgia', 'serif'],
       },
       colors: {
         forest: {
