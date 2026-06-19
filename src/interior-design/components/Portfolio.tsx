@@ -40,10 +40,10 @@ export default function Portfolio() {
           </button>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Grid — left col normal, right col offset down */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-0 items-start pb-16">
           {projects.map((p, i) => (
-            <div key={i} className="group cursor-pointer">
+            <div key={i} className={`group cursor-pointer ${i % 2 === 1 ? 'mt-12' : 'mt-0'} mb-8`}>
               <div className="relative overflow-hidden" style={{ aspectRatio: '4/3' }}>
                 <img src={p.img} alt={p.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />

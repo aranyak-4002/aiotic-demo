@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Search } from 'lucide-react'
 import { useDemoParams } from '../useParams'
 
 const links = [
@@ -11,16 +11,30 @@ const links = [
 ]
 
 export default function Navbar() {
-  const { firmName, phone } = useDemoParams()
+  const { firmName, specialty, phone } = useDemoParams()
   const [open, setOpen] = useState(false)
+
+  // Initials from firm name
+  const initials = firmName
+    .split(' ')
+    .slice(0, 2)
+    .map(w => w[0])
+    .join('')
+    .toUpperCase()
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <a href="#" className="flex items-center gap-2 font-inter font-semibold uppercase tracking-widest text-sm text-gray-900">
-          <span>🛋️</span>
-          <span>{firmName}</span>
+      <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+
+        {/* Logo — initials avatar + firm name + specialty */}
+        <a href="#" className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-full bg-gray-900 flex items-center justify-center flex-shrink-0">
+            <span className="text-white font-inter font-semibold text-xs">{initials}</span>
+          </div>
+          <div>
+            <div className="font-inter font-semibold text-sm text-gray-900 leading-tight">{firmName}</div>
+            <div className="font-inter text-xs text-gray-400 leading-tight">{specialty}</div>
+          </div>
         </a>
 
         {/* Desktop nav */}
@@ -33,11 +47,14 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* CTA + mobile toggle */}
-        <div className="flex items-center gap-4">
+        {/* Right: search + CTA + mobile toggle */}
+        <div className="flex items-center gap-3">
+          <button className="hidden md:flex w-8 h-8 items-center justify-center text-gray-400 hover:text-gray-700 transition-colors">
+            <Search size={17} />
+          </button>
           <a href={`tel:${phone.replace(/\D/g, '')}`}
             className="hidden md:inline-block bg-gray-900 text-white font-inter text-sm py-2 px-5 hover:bg-gray-700 transition-colors">
-            Contact Us
+            Get In Touch
           </a>
           <button className="md:hidden" onClick={() => setOpen(o => !o)}>
             {open ? <X size={22} /> : <Menu size={22} />}
@@ -57,7 +74,7 @@ export default function Navbar() {
           ))}
           <a href={`tel:${phone.replace(/\D/g, '')}`}
             className="mt-4 block w-full text-center bg-gray-900 text-white font-inter text-sm py-3">
-            Contact Us
+            Get In Touch
           </a>
         </div>
       )}

@@ -9,7 +9,7 @@ const brands = [
 
 export default function Brands() {
   return (
-    <section className="border-t border-b border-gray-100 py-8 bg-white overflow-x-auto">
+    <section className="border-t border-b border-gray-100 py-5 bg-white overflow-x-auto">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-center justify-between gap-10 min-w-max mx-auto">
           {brands.map(b => (
