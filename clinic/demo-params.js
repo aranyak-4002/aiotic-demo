@@ -44,22 +44,22 @@
       if (el) el.setAttribute('content', cfg.name);
     });
 
-    // Replace logo images with clinic name text
-    document.querySelectorAll('img.logo_image, img.brand_logo').forEach(function (img) {
-      var span = document.createElement('span');
-      span.textContent = cfg.name;
-      span.style.cssText =
-        'font-family:Sora,sans-serif;font-size:18px;font-weight:700;' +
-        'color:inherit;letter-spacing:-0.3px;white-space:nowrap;';
-      img.parentNode.replaceChild(span, img);
-    });
+    // Replace logos and copyright by ID (most reliable — no Webflow JS interference)
+    var navLogo = document.getElementById('demo-nav-logo');
+    if (navLogo) navLogo.textContent = cfg.name;
 
-    // Replace "Lumora Dental" before "Lumora" so longer match goes first
+    var footerLogo = document.getElementById('demo-footer-logo');
+    if (footerLogo) footerLogo.textContent = cfg.name;
+
+    var copyright = document.getElementById('demo-copyright');
+    if (copyright) copyright.textContent = '© 2026 ' + cfg.name;
+
+    var copyright2 = document.getElementById('demo-copyright-2');
+    if (copyright2) copyright2.textContent = '© 2026 ' + cfg.name;
+
+    // Replace remaining "Lumora Dental" / "Lumora" text nodes
     replaceText(document.body, 'Lumora Dental', cfg.name);
     replaceText(document.body, 'Lumora', cfg.name);
-
-    // Replace footer credit
-    replaceText(document.body, 'Crafted by RapidXAI', 'Aiotic Technologies');
 
     // Hero sub-paragraph → doctor · specialty · area, city
     var heroPara = document.querySelector('.home-hero_para');
