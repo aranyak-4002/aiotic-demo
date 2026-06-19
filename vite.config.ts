@@ -4,7 +4,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/aiotic-demo/',
+  base: '/',
   build: {
     outDir: 'dist',
     emptyOutDir: true,
