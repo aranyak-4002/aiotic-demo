@@ -2,11 +2,23 @@ import { useState } from 'react'
 import { Bookmark, Share2, X, Menu } from 'lucide-react'
 import { useDemoParams } from '../useParams'
 
-const links = ['Home', 'About', 'Services', 'Portfolio', 'Contact']
+const links = [
+  { label: 'Home', href: '/interior-premium/' },
+  { label: 'About', href: '/interior-premium/about/' },
+  { label: 'Services', href: '/interior-premium/services/' },
+  { label: 'Portfolio', href: '/interior-premium/portfolio/' },
+  { label: 'Contact', href: '/interior-premium/contact/' },
+]
 
 export default function Navbar() {
   const { firmName } = useDemoParams()
   const [open, setOpen] = useState(false)
+  const currentPath = window.location.pathname
+
+  function isActive(href: string) {
+    if (href === '/interior-premium/') return currentPath === '/interior-premium/' || currentPath === '/interior-premium'
+    return currentPath.includes(href.replace(/\/$/, ''))
+  }
 
   return (
     <>
@@ -14,19 +26,19 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
 
           {/* Left — subtle firm name */}
-          <span className="font-inter font-light text-xs tracking-[0.25em] uppercase" style={{ color: 'rgba(255,255,255,0.5)' }}>
+          <a href="/interior-premium/" className="font-inter font-light text-xs tracking-[0.25em] uppercase" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>
             {firmName}
-          </span>
+          </a>
 
           {/* Center — nav links */}
           <nav className="hidden md:flex items-center gap-10">
             {links.map(l => (
-              <a key={l} href={`#${l.toLowerCase()}`}
+              <a key={l.label} href={l.href}
                 className="font-inter font-light text-xs uppercase transition-colors"
-                style={{ letterSpacing: '0.15em', color: 'rgba(255,255,255,0.6)' }}
+                style={{ letterSpacing: '0.15em', color: isActive(l.href) ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.6)' }}
                 onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,1)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}>
-                {l}
+                onMouseLeave={e => (e.currentTarget.style.color = isActive(l.href) ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.6)')}>
+                {l.label}
               </a>
             ))}
           </nav>
@@ -57,10 +69,10 @@ export default function Navbar() {
             <X size={24} />
           </button>
           {links.map(l => (
-            <a key={l} href={`#${l.toLowerCase()}`}
+            <a key={l.label} href={l.href}
               onClick={() => setOpen(false)}
               className="font-cormorant font-semibold text-4xl italic hover:text-gold transition-colors text-white">
-              {l}
+              {l.label}
             </a>
           ))}
         </div>

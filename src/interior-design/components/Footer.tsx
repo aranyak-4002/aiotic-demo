@@ -1,6 +1,12 @@
 import { useDemoParams } from '../useParams'
 
-const menuLinks = ['Home', 'About Us', 'Services', 'Portfolio', 'Contact']
+const menuLinks = [
+  { label: 'Home', href: '/interior-design/' },
+  { label: 'About Us', href: '/interior-design/about/' },
+  { label: 'Services', href: '/interior-design/services/' },
+  { label: 'Portfolio', href: '/interior-design/portfolio/' },
+  { label: 'Contact', href: '/interior-design/contact/' },
+]
 const helpLinks = ['Privacy and Policy', 'Term of Use']
 const socialLinks = ['Instagram', 'Facebook', 'Twitter']
 
@@ -26,8 +32,8 @@ export default function Footer() {
             <h4 className="font-inter font-semibold text-white mb-4 text-sm">Menu</h4>
             <ul className="space-y-2">
               {menuLinks.map(l => (
-                <li key={l}>
-                  <a href="#" className="font-inter text-gray-400 text-sm hover:text-white transition-colors">{l}</a>
+                <li key={l.label}>
+                  <a href={l.href} className="font-inter text-gray-400 text-sm hover:text-white transition-colors">{l.label}</a>
                 </li>
               ))}
             </ul>

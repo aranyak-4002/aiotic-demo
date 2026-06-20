@@ -10,7 +10,7 @@ const services = [
 ]
 
 export default function Stats() {
-  const { agencyName } = useDemoParams()
+  const { } = useDemoParams()
 
   return (
     <section style={{ background: '#fff', padding: '5rem 2.5rem' }}>

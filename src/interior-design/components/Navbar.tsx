@@ -3,16 +3,17 @@ import { Menu, X, Search } from 'lucide-react'
 import { useDemoParams } from '../useParams'
 
 const links = [
-  { label: 'Home', href: '#' },
-  { label: 'About Us', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/interior-design/' },
+  { label: 'About Us', href: '/interior-design/about/' },
+  { label: 'Services', href: '/interior-design/services/' },
+  { label: 'Portfolio', href: '/interior-design/portfolio/' },
+  { label: 'Contact', href: '/interior-design/contact/' },
 ]
 
 export default function Navbar() {
   const { firmName, specialty, phone } = useDemoParams()
   const [open, setOpen] = useState(false)
+  const currentPath = window.location.pathname
 
   // Initials from firm name
   const initials = firmName
@@ -22,12 +23,17 @@ export default function Navbar() {
     .join('')
     .toUpperCase()
 
+  function isActive(href: string) {
+    if (href === '/interior-design/') return currentPath === '/interior-design/' || currentPath === '/interior-design'
+    return currentPath.includes(href.replace(/\/$/, ''))
+  }
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
       <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
 
         {/* Logo — initials avatar + firm name + specialty */}
-        <a href="#" className="flex items-center gap-3">
+        <a href="/interior-design/" className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-full bg-gray-900 flex items-center justify-center flex-shrink-0">
             <span className="text-white font-inter font-semibold text-xs">{initials}</span>
           </div>
@@ -41,7 +47,7 @@ export default function Navbar() {
         <nav className="hidden md:flex items-center gap-8">
           {links.map(l => (
             <a key={l.label} href={l.href}
-              className="font-inter text-sm text-gray-500 hover:text-gray-900 transition-colors">
+              className={`font-inter text-sm transition-colors ${isActive(l.href) ? 'text-gray-900 font-medium' : 'text-gray-500 hover:text-gray-900'}`}>
               {l.label}
             </a>
           ))}
@@ -68,7 +74,7 @@ export default function Navbar() {
           {links.map(l => (
             <a key={l.label} href={l.href}
               onClick={() => setOpen(false)}
-              className="block py-3 font-inter text-sm text-gray-600 border-b border-gray-100 last:border-0">
+              className={`block py-3 font-inter text-sm border-b border-gray-100 last:border-0 ${isActive(l.href) ? 'text-gray-900 font-medium' : 'text-gray-600'}`}>
               {l.label}
             </a>
           ))}

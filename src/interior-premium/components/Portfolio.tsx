@@ -23,7 +23,7 @@ const images = [
 
 export default function Portfolio() {
   const [active, setActive] = useState(0)
-  const { firmName } = useDemoParams()
+  const { } = useDemoParams()
 
   return (
     <section id="portfolio" className="py-24" style={{ background: '#152E29' }}>

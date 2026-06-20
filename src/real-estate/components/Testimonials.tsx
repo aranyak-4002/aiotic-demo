@@ -8,7 +8,7 @@ const testimonials = [
 ]
 
 export default function Testimonials() {
-  const { agencyName } = useDemoParams()
+  const { } = useDemoParams()
   const [current, setCurrent] = useState(0)
 
   return (

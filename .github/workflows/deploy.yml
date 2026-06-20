@@ -36,9 +36,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Copy clinic template (static Webflow HTML)
-        run: cp -r clinic dist/clinic
-
       - name: Copy CNAME
         run: cp public/CNAME dist/CNAME
 

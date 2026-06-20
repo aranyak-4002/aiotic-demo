@@ -1,7 +1,7 @@
 import { useDemoParams } from '../useParams'
 
 export default function Leadership() {
-  const { agentName, agencyName, city, years } = useDemoParams()
+  const { agentName, agencyName, years } = useDemoParams()
 
   return (
     <section style={{ background: '#fff', padding: '5rem 2.5rem' }}>

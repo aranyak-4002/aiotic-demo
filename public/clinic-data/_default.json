@@ -1,0 +1,95 @@
+{
+  "name": "Lumora Dental",
+  "tagline": "Modern, Gentle Dentistry",
+  "phone": "+91 9307512816",
+  "email": "hello@lumoradental.com",
+  "city": "Mumbai",
+  "booking_url": "https://calendly.com/shreyasrajsony11",
+  "hours": {
+    "weekday": "8:00 – 17:00",
+    "weekend": "9:30 – 17:30"
+  },
+  "stats": {
+    "years": "12+",
+    "patients": "5,000+",
+    "rating": "4.9★",
+    "awards": "18"
+  },
+  "doctors": [
+    {
+      "name": "Dr. Olivia Thompson",
+      "role": "Lead Cosmetic Dentist",
+      "photo": "assets/img/gen_team-image-6.jpg"
+    },
+    {
+      "name": "Dr. Rishi",
+      "role": "Orthodontist",
+      "photo": "assets/img/gen_team-image-5.jpg"
+    },
+    {
+      "name": "Dr. Emman Collins",
+      "role": "Pediatric Dentist",
+      "photo": "assets/img/gen_team-image-4.jpg"
+    }
+  ],
+  "services": [
+    {
+      "name": "Preventive Dentistry",
+      "description": "Regular checkups, cleanings, and early detection to keep your smile healthy for life.",
+      "tags": ["Dental Checkup", "Cleaning", "Whitening", "X-Rays"]
+    },
+    {
+      "name": "Cosmetic Dentistry",
+      "description": "Cosmetic dentistry improves the appearance of your teeth through treatments like whitening, veneers, and bonding.",
+      "tags": ["Teeth Whitening", "Veneers", "Bonding", "Cosmetic Bonding"]
+    },
+    {
+      "name": "Restorative Treatments",
+      "description": "Repair damaged or missing teeth using fillings, crowns, bridges, and implants to restore function and appearance.",
+      "tags": ["Fillings", "Crowns", "Bridges", "Dental Implants"]
+    },
+    {
+      "name": "Orthodontics",
+      "description": "Correct misaligned teeth and bite issues using braces or aligners, improving both appearance and long-term oral health.",
+      "tags": ["Braces", "Clear Aligners", "Retainers", "Bite Correction"]
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Kristin Watson",
+      "role": "Business Owner",
+      "photo": "assets/img/gen_testimonial-author-1.jpg",
+      "quote": "I've always been nervous about visiting the dentist, but Lumora changed everything. The staff is warm, and the care is exceptional. I finally enjoy smiling again."
+    },
+    {
+      "name": "Michael Carter",
+      "role": "Business Consultant",
+      "photo": "assets/img/gen_testimonial-author-2.jpg",
+      "quote": "The team made my dental visit incredibly comfortable. Professional care, clear explanations, and excellent results. I finally feel confident about my smile again."
+    },
+    {
+      "name": "Daniel Hughes",
+      "role": "Software Engineer",
+      "photo": "assets/img/gen_testimonial-author-3.jpg",
+      "quote": "From consultation to treatment, everything was smooth and stress-free. The dentist was gentle, and the staff was supportive. Highly recommend their dental services."
+    }
+  ],
+  "social": {
+    "facebook": "https://www.facebook.com",
+    "instagram": "https://www.instagram.com",
+    "twitter": "https://www.twitter.com",
+    "linkedin": "#"
+  },
+  "locations": [
+    {
+      "name": "Lumora Dental – Main Branch",
+      "address": "123 Main Street, Bandra West, Mumbai 400050",
+      "map_url": "https://maps.google.com"
+    },
+    {
+      "name": "Lumora Dental – Andheri",
+      "address": "45 Link Road, Andheri West, Mumbai 400058",
+      "map_url": "https://maps.google.com"
+    }
+  ]
+}

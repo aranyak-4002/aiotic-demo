@@ -9,20 +9,35 @@ import CTA from './components/CTA'
 import Footer from './components/Footer'
 import Leadership from './components/Leadership'
 import Team from './components/Team'
+import PropertiesPage from './pages/PropertiesPage'
+import ServicesPage from './pages/ServicesPage'
+import AboutPage from './pages/AboutPage'
+import TeamPage from './pages/TeamPage'
+
+function getPage() {
+  const path = window.location.pathname
+  if (path.includes('/properties')) return 'properties'
+  if (path.includes('/services')) return 'services'
+  if (path.includes('/about')) return 'about'
+  if (path.includes('/team')) return 'team'
+  return 'home'
+}
 
 export default function App() {
+  const page = getPage()
+
   return (
     <div style={{ fontFamily: 'Inter, sans-serif', background: '#fff', color: '#0A0A0A' }}>
       <Navbar />
-      <Hero />
-      <HowItWorks />
-      <Properties />
-      <Stats />
-      <Leadership />
-      <WhyUs />
-      <Team />
-      <Testimonials />
-      <CTA />
+      {page === 'home' && (
+        <div style={{ paddingTop: '68px' }}>
+          <Hero /><HowItWorks /><Properties /><Stats /><Leadership /><WhyUs /><Team /><Testimonials /><CTA />
+        </div>
+      )}
+      {page === 'properties' && <PropertiesPage />}
+      {page === 'services' && <ServicesPage />}
+      {page === 'about' && <AboutPage />}
+      {page === 'team' && <TeamPage />}
       <Footer />
 
       {/* Watermark */}

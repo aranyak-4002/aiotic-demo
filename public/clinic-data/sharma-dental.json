@@ -1,0 +1,95 @@
+{
+  "name": "Dr. Sharma Dental Care",
+  "tagline": "Gentle Care for Every Smile",
+  "phone": "+91 98765 43210",
+  "email": "hello@sharmadental.com",
+  "city": "Pune",
+  "booking_url": "https://cal.com/sharmadental",
+  "hours": {
+    "weekday": "9:00 – 19:00",
+    "weekend": "10:00 – 16:00"
+  },
+  "stats": {
+    "years": "8+",
+    "patients": "3,200+",
+    "rating": "4.8★",
+    "awards": "6"
+  },
+  "doctors": [
+    {
+      "name": "Dr. Priya Sharma",
+      "role": "Lead Cosmetic Dentist",
+      "photo": "assets/img/gen_team-image-6.jpg"
+    },
+    {
+      "name": "Dr. Rahul Mehta",
+      "role": "Orthodontist",
+      "photo": "assets/img/gen_team-image-5.jpg"
+    },
+    {
+      "name": "Dr. Anjali Singh",
+      "role": "Pediatric Dentist",
+      "photo": "assets/img/gen_team-image-4.jpg"
+    }
+  ],
+  "services": [
+    {
+      "name": "Preventive Dentistry",
+      "description": "Routine checkups, professional cleanings, and early detection to keep your family's smiles healthy.",
+      "tags": ["Dental Checkup", "Cleaning", "Whitening", "X-Rays"]
+    },
+    {
+      "name": "Cosmetic Dentistry",
+      "description": "Transform your smile with whitening, veneers, and bonding tailored to your natural look.",
+      "tags": ["Teeth Whitening", "Veneers", "Bonding", "Smile Design"]
+    },
+    {
+      "name": "Restorative Treatments",
+      "description": "Restore damaged or missing teeth with modern fillings, crowns, and implants.",
+      "tags": ["Fillings", "Crowns", "Bridges", "Dental Implants"]
+    },
+    {
+      "name": "Orthodontics",
+      "description": "Straighten teeth and correct bite issues with braces or invisible aligners.",
+      "tags": ["Braces", "Clear Aligners", "Retainers", "Bite Correction"]
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Sneha Kulkarni",
+      "role": "Homemaker, Pune",
+      "photo": "assets/img/gen_testimonial-author-1.jpg",
+      "quote": "Dr. Priya Sharma made my root canal completely painless. The clinic is spotless and the staff is so warm. My whole family now comes here!"
+    },
+    {
+      "name": "Amit Joshi",
+      "role": "Software Engineer, Kothrud",
+      "photo": "assets/img/gen_testimonial-author-2.jpg",
+      "quote": "Got my braces done here and the results are amazing. Dr. Rahul is incredibly thorough and always explains every step. Highly recommend!"
+    },
+    {
+      "name": "Ritu Desai",
+      "role": "Teacher, Aundh",
+      "photo": "assets/img/gen_testimonial-author-3.jpg",
+      "quote": "Brought my 7-year-old here and Dr. Anjali was so patient and gentle. Best pediatric dental experience in Pune by far."
+    }
+  ],
+  "social": {
+    "facebook": "https://www.facebook.com/sharmadental",
+    "instagram": "https://www.instagram.com/sharmadental",
+    "twitter": "#",
+    "linkedin": "#"
+  },
+  "locations": [
+    {
+      "name": "Dr. Sharma Dental Care – Kothrud",
+      "address": "Shop 12, Paud Road, Kothrud, Pune 411038",
+      "map_url": "https://maps.google.com/?q=Kothrud,Pune"
+    },
+    {
+      "name": "Dr. Sharma Dental Care – Aundh",
+      "address": "Ground Floor, Aundh Road, Aundh, Pune 411007",
+      "map_url": "https://maps.google.com/?q=Aundh,Pune"
+    }
+  ]
+}

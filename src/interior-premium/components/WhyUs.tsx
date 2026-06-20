@@ -59,7 +59,7 @@ export default function WhyUs() {
 
         {/* Navigation buttons */}
         <div className="flex items-center gap-4">
-          {slides.map((s, i) => (
+          {slides.map((_s, i) => (
             <button
               key={i}
               onClick={() => setActive(i)}

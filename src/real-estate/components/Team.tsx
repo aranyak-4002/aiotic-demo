@@ -8,7 +8,7 @@ const members = [
 ]
 
 export default function Team() {
-  const { agentName, agencyName } = useDemoParams()
+  const { agentName } = useDemoParams()
   const localized = members.map((m, i) => ({ ...m, name: i === 0 ? agentName : m.name }))
 
   return (

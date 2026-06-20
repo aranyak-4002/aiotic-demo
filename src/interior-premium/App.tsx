@@ -9,23 +9,37 @@ import WhyUs from './components/WhyUs'
 import Portfolio from './components/Portfolio'
 import Testimonials from './components/Testimonials'
 import Footer from './components/Footer'
+import AboutPage from './pages/AboutPage'
+import ServicesPage from './pages/ServicesPage'
+import PortfolioPage from './pages/PortfolioPage'
+import ContactPage from './pages/ContactPage'
 import { useDemoParams } from './useParams'
+
+function getPage() {
+  const path = window.location.pathname
+  if (path.includes('/about')) return 'about'
+  if (path.includes('/services')) return 'services'
+  if (path.includes('/portfolio')) return 'portfolio'
+  if (path.includes('/contact')) return 'contact'
+  return 'home'
+}
 
 export default function App() {
   const { cal } = useDemoParams()
+  const page = getPage()
 
   return (
     <div className="font-inter" style={{ background: '#1C3A35', color: '#ffffff' }}>
       <Navbar />
-      <Hero />
-      <Intro />
-      <Stats />
-      <Studio />
-      <Services />
-      <Signature />
-      <WhyUs />
-      <Portfolio />
-      <Testimonials />
+      {page === 'home' && (
+        <div style={{ paddingTop: '72px' }}>
+          <Hero /><Intro /><Stats /><Studio /><Services /><Signature /><WhyUs /><Portfolio /><Testimonials />
+        </div>
+      )}
+      {page === 'about' && <AboutPage />}
+      {page === 'services' && <ServicesPage />}
+      {page === 'portfolio' && <PortfolioPage />}
+      {page === 'contact' && <ContactPage />}
       <Footer />
 
       {/* Watermark */}

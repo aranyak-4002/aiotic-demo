@@ -5,7 +5,7 @@ const networks = [
 ]
 
 export default function HowItWorks() {
-  const { agencyName } = useDemoParams()
+  const { } = useDemoParams()
 
   return (
     <>

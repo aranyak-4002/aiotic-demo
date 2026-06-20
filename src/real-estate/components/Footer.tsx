@@ -1,7 +1,15 @@
 import { useDemoParams } from '../useParams'
 
+const quickLinks = [
+  { label: 'Home', href: '/real-estate/' },
+  { label: 'Properties', href: '/real-estate/properties/' },
+  { label: 'Services', href: '/real-estate/services/' },
+  { label: 'About Us', href: '/real-estate/about/' },
+  { label: 'Team', href: '/real-estate/team/' },
+]
+
 const cols = [
-  { title: 'Quick Links', links: ['Home', 'Properties', 'Services', 'About Us', 'Blog'] },
+  { title: 'Quick Links', links: ['Home', 'Properties', 'Services', 'About Us', 'Team'] },
   { title: 'Resources', links: ['Buyer\'s Guide', 'Investment Tips', 'Legal FAQ', 'EMI Calculator', 'Area Guides'] },
   { title: 'Contact', links: [] },
 ]
@@ -25,24 +33,41 @@ export default function Footer() {
             </div>
           </div>
 
-          {cols.slice(0, 2).map(col => (
-            <div key={col.title}>
-              <p style={{ fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                {col.title}
-              </p>
-              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-                {col.links.map(l => (
-                  <li key={l}>
-                    <a href="#" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400, fontSize: '0.82rem', color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}
-                      onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-                      onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.45)')}>
-                      {l}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Quick Links */}
+          <div>
+            <p style={{ fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+              Quick Links
+            </p>
+            <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+              {quickLinks.map(l => (
+                <li key={l.label}>
+                  <a href={l.href} style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400, fontSize: '0.82rem', color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}
+                    onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                    onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.45)')}>
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Resources */}
+          <div>
+            <p style={{ fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+              Resources
+            </p>
+            <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+              {cols[1].links.map(l => (
+                <li key={l}>
+                  <a href="#" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400, fontSize: '0.82rem', color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}
+                    onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                    onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.45)')}>
+                    {l}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           {/* Social */}
           <div>

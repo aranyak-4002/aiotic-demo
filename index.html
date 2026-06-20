@@ -126,20 +126,7 @@
 
   <div class="template-grid">
 
-    <div class="card">
-      <div class="card-thumb">🏥</div>
-      <div class="card-body">
-        <div class="card-tag">Healthcare</div>
-        <div class="card-title">Dental &amp; Medical Clinic</div>
-        <div class="card-desc">Full clinic website — hero, services, story stats, lead capture form, emergency contact, and footer. Personalize with clinic name, doctor, specialty, city, and phone.</div>
-        <div class="card-footer">
-          <a href="clinic/" class="btn-primary">Open Demo →</a>
-          <button class="btn-ghost" onclick="switchTab('clinic')">Personalize</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
+<div class="card">
       <div class="card-thumb">🛋️</div>
       <div class="card-body">
         <div class="card-tag">Interior Design</div>
@@ -185,26 +172,11 @@
     <p>Select a template, fill in the details — the URL updates live. Copy and send on WhatsApp.</p>
 
     <div class="template-tabs">
-      <button class="tab-btn active" id="tab-clinic" onclick="switchTab('clinic')">🏥 Clinic</button>
-      <button class="tab-btn" id="tab-realestate" onclick="switchTab('realestate')">🏡 Real Estate</button>
-    </div>
-
-    <!-- Clinic fields -->
-    <div class="param-panel active" id="panel-clinic">
-      <div class="param-grid">
-        <div class="field"><label>Clinic Name</label><input id="c-name" type="text" placeholder="Dr Sharma Dental Care" oninput="buildUrl()"/></div>
-        <div class="field"><label>Doctor Name</label><input id="c-doctor" type="text" placeholder="Dr. Priya Sharma" oninput="buildUrl()"/></div>
-        <div class="field"><label>Specialty</label><input id="c-spec" type="text" placeholder="Cosmetic &amp; General Dentistry" oninput="buildUrl()"/></div>
-        <div class="field"><label>City</label><input id="c-city" type="text" placeholder="Pune" oninput="buildUrl()"/></div>
-        <div class="field"><label>Phone</label><input id="c-phone" type="text" placeholder="+91 98765 43210" oninput="buildUrl()"/></div>
-        <div class="field"><label>Area / Neighbourhood</label><input id="c-area" type="text" placeholder="Kothrud" oninput="buildUrl()"/></div>
-        <div class="field"><label>Email</label><input id="c-email" type="text" placeholder="hello@drsharma.com" oninput="buildUrl()"/></div>
-        <div class="field"><label>Booking Link (Cal.com / Calendly)</label><input id="c-cal" type="text" placeholder="https://cal.com/yourname" oninput="buildUrl()"/></div>
-      </div>
+      <button class="tab-btn active" id="tab-realestate" onclick="switchTab('realestate')">🏡 Real Estate</button>
     </div>
 
     <!-- Real Estate fields -->
-    <div class="param-panel" id="panel-realestate">
+    <div class="param-panel active" id="panel-realestate">
       <div class="param-grid">
         <div class="field"><label>Agency Name</label><input id="r-agency" type="text" placeholder="Horizon Estate" oninput="buildUrl()"/></div>
         <div class="field"><label>Agent Name</label><input id="r-agent" type="text" placeholder="Rahul Sharma" oninput="buildUrl()"/></div>
@@ -219,7 +191,7 @@
       </div>
     </div>
 
-    <div class="output-url" id="output-url">demo.getaiotic.com/clinic/</div>
+    <div class="output-url" id="output-url">demo.getaiotic.com/real-estate/</div>
     <button class="copy-btn" id="copy-btn" onclick="copyUrl()">Copy URL</button>
   </div>
 </section>
@@ -229,10 +201,7 @@
 </footer>
 
 <script>
-  var currentTab = 'clinic';
-
   function switchTab(tab) {
-    currentTab = tab;
     document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
     document.querySelectorAll('.param-panel').forEach(function(p) { p.classList.remove('active'); });
     document.getElementById('tab-' + tab).classList.add('active');
@@ -243,39 +212,21 @@
 
   function buildUrl() {
     var origin = window.location.origin;
-    var url;
-    if (currentTab === 'clinic') {
-      var p = {
-        name:   document.getElementById('c-name').value.trim(),
-        doctor: document.getElementById('c-doctor').value.trim(),
-        spec:   document.getElementById('c-spec').value.trim(),
-        city:   document.getElementById('c-city').value.trim(),
-        phone:  document.getElementById('c-phone').value.trim(),
-        area:   document.getElementById('c-area').value.trim(),
-        email:  document.getElementById('c-email').value.trim(),
-        cal:    document.getElementById('c-cal').value.trim(),
-      };
-      var qs = Object.entries(p).filter(function(e){ return e[1]; })
-        .map(function(e){ return encodeURIComponent(e[0]) + '=' + encodeURIComponent(e[1]); }).join('&');
-      url = origin + '/clinic/' + (qs ? '?' + qs : '');
-    } else {
-      var p2 = {
-        agency:   document.getElementById('r-agency').value.trim(),
-        agent:    document.getElementById('r-agent').value.trim(),
-        city:     document.getElementById('r-city').value.trim(),
-        phone:    document.getElementById('r-phone').value.trim(),
-        email:    document.getElementById('r-email').value.trim(),
-        tag:      document.getElementById('r-tag').value.trim(),
-        props:    document.getElementById('r-props').value.trim(),
-        clients:  document.getElementById('r-clients').value.trim(),
-        years:    document.getElementById('r-years').value.trim(),
-        spec:     document.getElementById('r-spec').value.trim(),
-      };
-      var qs2 = Object.entries(p2).filter(function(e){ return e[1]; })
-        .map(function(e){ return encodeURIComponent(e[0]) + '=' + encodeURIComponent(e[1]); }).join('&');
-      url = origin + '/real-estate/' + (qs2 ? '?' + qs2 : '');
-    }
-    document.getElementById('output-url').textContent = url;
+    var p = {
+      agency:   document.getElementById('r-agency').value.trim(),
+      agent:    document.getElementById('r-agent').value.trim(),
+      city:     document.getElementById('r-city').value.trim(),
+      phone:    document.getElementById('r-phone').value.trim(),
+      email:    document.getElementById('r-email').value.trim(),
+      tag:      document.getElementById('r-tag').value.trim(),
+      props:    document.getElementById('r-props').value.trim(),
+      clients:  document.getElementById('r-clients').value.trim(),
+      years:    document.getElementById('r-years').value.trim(),
+      spec:     document.getElementById('r-spec').value.trim(),
+    };
+    var qs = Object.entries(p).filter(function(e){ return e[1]; })
+      .map(function(e){ return encodeURIComponent(e[0]) + '=' + encodeURIComponent(e[1]); }).join('&');
+    document.getElementById('output-url').textContent = origin + '/real-estate/' + (qs ? '?' + qs : '');
   }
 
   function copyUrl() {

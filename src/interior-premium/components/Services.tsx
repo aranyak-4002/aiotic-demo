@@ -31,7 +31,7 @@ const services = [
 ]
 
 export default function Services() {
-  const { cal } = useDemoParams()
+  const { } = useDemoParams()
 
   return (
     <section id="services" className="py-24 px-6 md:px-10" style={{ background: '#1C3A35' }}>

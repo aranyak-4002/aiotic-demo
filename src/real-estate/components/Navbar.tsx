@@ -2,25 +2,38 @@ import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { useDemoParams } from '../useParams'
 
-const links = ['Home', 'Properties', 'Services', 'About', 'Team']
+const links = [
+  { label: 'Home', href: '/real-estate/' },
+  { label: 'Properties', href: '/real-estate/properties/' },
+  { label: 'Services', href: '/real-estate/services/' },
+  { label: 'About', href: '/real-estate/about/' },
+  { label: 'Team', href: '/real-estate/team/' },
+]
 
 export default function Navbar() {
   const { agencyName, phone } = useDemoParams()
   const [open, setOpen] = useState(false)
+  const currentPath = window.location.pathname
+
+  function isActive(href: string) {
+    if (href === '/real-estate/') return currentPath === '/real-estate/' || currentPath === '/real-estate'
+    return currentPath.includes(href.replace(/\/$/, ''))
+  }
 
   return (
     <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, background: '#fff', borderBottom: '1px solid #EBEBEB' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2.5rem', display: 'flex', alignItems: 'center', height: '68px', gap: '2rem' }}>
-        <a href="#" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 700, fontSize: '1.05rem', color: '#0A0A0A', textDecoration: 'none', flexShrink: 0, letterSpacing: '-0.02em' }}>
+        <a href="/real-estate/" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 700, fontSize: '1.05rem', color: '#0A0A0A', textDecoration: 'none', flexShrink: 0, letterSpacing: '-0.02em' }}>
           {agencyName}
         </a>
 
         <div style={{ display: 'flex', gap: '2rem', marginLeft: 'auto', alignItems: 'center' }}>
           {links.map(l => (
-            <a key={l} href="#" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400, fontSize: '0.875rem', color: '#555', textDecoration: 'none' }}
+            <a key={l.label} href={l.href}
+              style={{ fontFamily: 'Inter, sans-serif', fontWeight: isActive(l.href) ? 600 : 400, fontSize: '0.875rem', color: isActive(l.href) ? '#0A0A0A' : '#555', textDecoration: 'none' }}
               onMouseEnter={e => (e.currentTarget.style.color = '#0A0A0A')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#555')}>
-              {l}
+              onMouseLeave={e => (e.currentTarget.style.color = isActive(l.href) ? '#0A0A0A' : '#555')}>
+              {l.label}
             </a>
           ))}
           <a href={`tel:${phone}`} style={{

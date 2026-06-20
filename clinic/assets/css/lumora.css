@@ -2990,8 +2990,9 @@ figure {
 
 .navbar_logo {
   width: var(--_max-width---max-width--100);
-  max-width: 140px;
+  max-width: 160px;
   padding: var(--_size-variables---element-spacing--none);
+  flex-shrink: 0;
 }
 
 .navbar_container {
@@ -4737,10 +4738,8 @@ figure {
 }
 
 .section_testimonial.is-home {
-  background-image: url("../img/69ddd539a343355970d2be89_testimonial-background.webp");
-  background-position: 50% 100%;
-  background-size: cover;
-  background-attachment: fixed;
+  background-image: none;
+  background-color: #ffffff;
 }
 
 .testimonial_block {
@@ -9104,25 +9103,13 @@ footer{border-top:3px solid var(--primitive-color--primary-500,#24a3b1);}
 
 /* ===== Testimonial card: greenery photo background + cyan overlay ===== */
 .testimonial-slider_card{
-  background-image:linear-gradient(160deg, rgba(2,47,52,.86), rgba(28,150,165,.80)), url('../img/gen_testimonial-bg.jpg')!important;
+  background-image:none!important;
+  background-color:#ffffff!important;
   background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;
 }
-.testimonial-slider_card, .testimonial-slider_card h1,.testimonial-slider_card h2,.testimonial-slider_card h3,
-.testimonial-slider_card p,.testimonial-slider_card div,.testimonial-slider_card .testimonial-author_name,
-.testimonial-slider_card .testimonial-slider_quotes{color:#ffffff!important;}
-.testimonial-slider_card .testimonial-author_role,.testimonial-slider_card [class*="role"]{color:rgba(255,255,255,.82)!important;}
-.testimonial-slider_card .testimonial-author_image{border:3px solid rgba(255,255,255,.6);}
+.testimonial-slider_card .testimonial-author_image{border:none;}
 
-/* ===== Team section: greenery clinic background + cyan overlay ===== */
-.section_team{background-image:url('../img/gen_team-bg.jpg')!important;background-size:cover!important;background-position:center!important;background-attachment:fixed;}
-.section_team .home-team_header-title,.section_team .home-team_header-para{color:#ffffff!important;}
-.section_team .home-team_header-para{color:rgba(255,255,255,.85)!important;}
-.section_team .text-highlighted{color:#7fe3ef!important;}
-.section_team .section_tag{background:rgba(255,255,255,.16)!important;color:#ffffff!important;}
-.section_team .section_tag svg, .section_team .section_tag path{color:#ffffff!important;fill:#ffffff!important;}
-
-/* team-header-readability */
-.section_team .home-team_header-title,.section_team .home-team_header-para{text-shadow:0 2px 14px rgba(0,0,0,.45);}
+.section_team,.section_team.is-home{background:none!important;background-color:#ffffff!important;background-image:none!important;}
 
 /* Safety: reveal/portrait/blog images must never stay blurred (no leftover IX2 blur) */
 .team_image,.blog-item_image,.our-story_image,.about-hero_image,.home-value_image{filter:none !important;-webkit-filter:none !important;}

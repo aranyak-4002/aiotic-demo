@@ -1,6 +1,12 @@
 import { useDemoParams } from '../useParams'
 
-const navLinks = ['Home', 'About', 'Services', 'Portfolio', 'Contact']
+const navLinks = [
+  { label: 'Home', href: '/interior-premium/' },
+  { label: 'About', href: '/interior-premium/about/' },
+  { label: 'Services', href: '/interior-premium/services/' },
+  { label: 'Portfolio', href: '/interior-premium/portfolio/' },
+  { label: 'Contact', href: '/interior-premium/contact/' },
+]
 const socialLinks = ['Instagram', 'Houzz', 'Pinterest']
 
 export default function Footer() {
@@ -36,9 +42,9 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <nav className="flex flex-wrap gap-8">
             {navLinks.map(l => (
-              <a key={l} href="#"
+              <a key={l.label} href={l.href}
                 className="font-inter font-light text-xs text-white/50 hover:text-white transition-colors uppercase tracking-wider">
-                {l}
+                {l.label}
               </a>
             ))}
           </nav>

@@ -6,20 +6,37 @@ import Services from './components/Services'
 import Portfolio from './components/Portfolio'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
+import AboutPage from './pages/AboutPage'
+import ServicesPage from './pages/ServicesPage'
+import PortfolioPage from './pages/PortfolioPage'
+import ContactPage from './pages/ContactPage'
 import { useDemoParams } from './useParams'
+
+function getPage() {
+  const path = window.location.pathname
+  if (path.includes('/about')) return 'about'
+  if (path.includes('/services')) return 'services'
+  if (path.includes('/portfolio')) return 'portfolio'
+  if (path.includes('/contact')) return 'contact'
+  return 'home'
+}
 
 export default function App() {
   const { cal } = useDemoParams()
+  const page = getPage()
 
   return (
     <div className="font-inter bg-white text-gray-900">
       <Navbar />
-      <Hero />
-      <Brands />
-      <About />
-      <Services />
-      <Portfolio />
-      <CTA />
+      {page === 'home' && (
+        <div style={{ paddingTop: '65px' }}>
+          <Hero /><Brands /><About /><Services /><Portfolio /><CTA />
+        </div>
+      )}
+      {page === 'about' && <AboutPage />}
+      {page === 'services' && <ServicesPage />}
+      {page === 'portfolio' && <PortfolioPage />}
+      {page === 'contact' && <ContactPage />}
       <Footer />
 
       {/* Aiotic watermark */}
