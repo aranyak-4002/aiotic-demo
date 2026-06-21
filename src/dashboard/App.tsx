@@ -233,8 +233,15 @@ export default function App() {
     const { data } = await supabase
       .from('demo_clients')
       .select('*')
-      .order('created_at', { ascending: false })
-    if (data) setClients(data as DemoClient[])
+    if (data) {
+      const fetchedClients = data as DemoClient[]
+      fetchedClients.sort((a, b) => {
+        const orderA = a.data?.sheet_order ?? Infinity
+        const orderB = b.data?.sheet_order ?? Infinity
+        return orderA - orderB
+      })
+      setClients(fetchedClients)
+    }
   }
 
   async function handleDelete(id: string) {

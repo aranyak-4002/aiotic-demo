@@ -147,54 +147,89 @@
     }
   }
 
-  // ── 9. Team / doctors ──────────────────────────────────────────────────────
+  // ── 9. Team / doctors (UPDATED: show/hide logic) ──────────────────────────
+  // If data.doctors has ≥1 → show only those, hide extras
+  // If data.doctors is missing or empty → keep all defaults
 
-  if (data.doctors && data.doctors.length) {
+  if (data.doctors && data.doctors.length > 0) {
     var teamCards = document.querySelectorAll('.team_item');
-    data.doctors.slice(0, teamCards.length).forEach(function (doc, i) {
-      var card = teamCards[i];
-      var nameEl = card.querySelector('.team-menmber_name');
-      var roleEl = card.querySelector('.team-menuber_designation');
-      var imgEl  = card.querySelector('.team_image');
-      if (nameEl)             nameEl.textContent = doc.name;
-      if (roleEl && doc.role) roleEl.textContent = doc.role;
-      if (imgEl  && doc.photo) { imgEl.src = doc.photo; imgEl.alt = doc.name; imgEl.removeAttribute('srcset'); }
+    teamCards.forEach(function (card, i) {
+      if (i < data.doctors.length) {
+        var doc = data.doctors[i];
+        var nameEl = card.querySelector('.team-menmber_name');
+        var roleEl = card.querySelector('.team-menuber_designation');
+        var imgEl  = card.querySelector('.team_image');
+        if (nameEl)             nameEl.textContent = doc.name;
+        if (roleEl && doc.role) roleEl.textContent = doc.role;
+        if (imgEl  && doc.photo) {
+          imgEl.setAttribute('referrerpolicy', 'no-referrer');
+          imgEl.src = doc.photo;
+          imgEl.alt = doc.name;
+          imgEl.removeAttribute('srcset');
+        }
+      } else {
+        // Hide extra template cards
+        var wrapper = card.closest('.w-dyn-item');
+        if (wrapper) wrapper.style.display = 'none';
+        else card.style.display = 'none';
+      }
     });
   }
 
-  // ── 10. Testimonials ───────────────────────────────────────────────────────
+  // ── 10. Testimonials (UPDATED: show/hide logic) ───────────────────────────
 
-  if (data.testimonials && data.testimonials.length) {
+  if (data.testimonials && data.testimonials.length > 0) {
     var slides = document.querySelectorAll('.testimonial-slider_slide');
-    data.testimonials.slice(0, slides.length).forEach(function (t, i) {
-      var slide   = slides[i];
-      var nameEl  = slide.querySelector('.testimonial-author_name');
-      var roleEl  = slide.querySelector('.testimonial-author_designation');
-      var imgEl   = slide.querySelector('.testimonial-author_image');
-      var quoteEl = slide.querySelector('.testimonial-slider_quotes');
-      if (nameEl)            nameEl.textContent  = t.name;
-      if (roleEl && t.role)  roleEl.textContent  = t.role;
-      if (quoteEl)           quoteEl.textContent = t.quote;
-      if (imgEl  && t.photo) imgEl.src           = t.photo;
+    slides.forEach(function (slide, i) {
+      if (i < data.testimonials.length) {
+        var t       = data.testimonials[i];
+        var nameEl  = slide.querySelector('.testimonial-author_name');
+        var roleEl  = slide.querySelector('.testimonial-author_designation');
+        var imgEl   = slide.querySelector('.testimonial-author_image');
+        var quoteEl = slide.querySelector('.testimonial-slider_quotes');
+        if (nameEl)            nameEl.textContent  = t.name;
+        if (roleEl)            roleEl.textContent  = t.role || '';
+        if (quoteEl)           quoteEl.textContent = t.quote;
+        if (imgEl  && t.photo) {
+          imgEl.setAttribute('referrerpolicy', 'no-referrer');
+          imgEl.src = t.photo;
+          imgEl.removeAttribute('srcset');
+        }
+      } else {
+        // Hide extra slides
+        slide.style.display = 'none';
+      }
     });
   }
 
-  // ── 11. Services (home page sticky scroll) ─────────────────────────────────
+  // ── 11. Services (UPDATED: show/hide logic) ────────────────────────────────
 
-  if (data.services && data.services.length) {
-    // Home page: .service-item_info-title + p + .service_tag items
-    var homeServiceItems = document.querySelectorAll('.service_item');
-    data.services.slice(0, homeServiceItems.length).forEach(function (svc, i) {
-      var item    = homeServiceItems[i];
-      var titleEl = item.querySelector('.service-item_info-title');
-      var descEl  = titleEl ? titleEl.nextElementSibling : null;
-      if (titleEl)                   titleEl.textContent = svc.name;
-      if (descEl && descEl.tagName === 'P') descEl.textContent = svc.description;
-      if (svc.tags) {
-        var tagEls = item.querySelectorAll('.service_tag div, .service-item_tag-list div');
-        svc.tags.slice(0, tagEls.length).forEach(function (tag, j) {
-          tagEls[j].textContent = tag;
-        });
+  if (data.services && data.services.length > 0) {
+    // Home page: .service_item-wrap blocks
+    var homeServiceItems = document.querySelectorAll('.service_item-wrap');
+    homeServiceItems.forEach(function (wrap, i) {
+      if (i < data.services.length) {
+        var svc     = data.services[i];
+        var item    = wrap.querySelector('.service_item');
+        var titleEl = item ? item.querySelector('.service-item_info-title') : null;
+        var descEl  = titleEl ? titleEl.nextElementSibling : null;
+        if (titleEl)                       titleEl.textContent = svc.name;
+        if (descEl && descEl.tagName === 'P' && svc.description) descEl.textContent = svc.description;
+        // Update tags if provided
+        if (svc.tags && svc.tags.length) {
+          var tagEls = item ? item.querySelectorAll('.service-item_tag div:not(.service-tag_icon)') : [];
+          svc.tags.slice(0, tagEls.length).forEach(function (tag, j) {
+            tagEls[j].textContent = tag;
+          });
+        }
+        // Update service image if provided
+        if (svc.image && item) {
+          var imgDiv = item.querySelector('.service-item_image');
+          if (imgDiv) imgDiv.style.backgroundImage = 'url("' + svc.image + '")';
+        }
+      } else {
+        // Hide extra service cards
+        wrap.style.display = 'none';
       }
     });
 
@@ -232,18 +267,27 @@
     if (data.stats.awards     && successCards[3]) setText('.success_card:nth-child(4) .success-card_number', data.stats.awards);
   }
 
-  // ── 14. Location / address (about page) ───────────────────────────────────
+  // ── 14. Location / address (UPDATED: show/hide logic) ─────────────────────
 
-  if (data.locations && data.locations.length) {
-    var locationItems = document.querySelectorAll('.location_list .location_item, .location_list > div');
-    data.locations.slice(0, locationItems.length).forEach(function (loc, i) {
-      var item    = locationItems[i];
-      var nameEl  = item.querySelector('.location_name, h3');
-      var addrEl  = item.querySelector('.location_address, p');
-      var mapLink = item.querySelector('a[href*="maps.google"], a[href*="goo.gl"]');
+  if (data.locations && data.locations.length > 0) {
+    // Update the paragraph text dynamically to avoid showing USA defaults
+    var locPara = document.querySelector('.location-header_para');
+    if (locPara) {
+      if (data.locations.length === 1) {
+        locPara.textContent = 'Visit our clinic in ' + (data.city || 'India') + ' for premium dental care.';
+      } else {
+        locPara.textContent = data.locations.length + ' convenient locations in ' + (data.city || 'India') + ' for premium dental care.';
+      }
+    }
+
+    var locationItems = document.querySelectorAll('.locatioin_item, .location_item');
+    locationItems.forEach(function (item, i) {
+      // Cycle through available locations to fill all marquee slots beautifully
+      var loc = data.locations[i % data.locations.length];
+      var nameEl  = item.querySelector('.location_title, .location_name, h3');
+      var addrEl  = item.querySelector('.location_para, .location_address, p');
       if (nameEl  && loc.name)    nameEl.textContent = loc.name;
       if (addrEl  && loc.address) addrEl.textContent = loc.address;
-      if (mapLink && loc.map_url) mapLink.href        = loc.map_url;
     });
   }
 
@@ -277,7 +321,112 @@
     swapLogoToText('.footer_brand', '.brand_logo', '#ffffff', '200px');
   }
 
-  // ── 17. Global "Lumora" → clinic name replacement in all text nodes ────────
+  // ── 16. Gallery / Before-After (NEW) ──────────────────────────────────────
+  // If data.gallery has ≥1 → replace gallery items, hide extras
+  // If data.gallery is missing or empty → keep all 3 defaults
+
+  if (data.gallery && data.gallery.length > 0) {
+    var galleryList = document.getElementById('gallery-list');
+    var galleryItems = galleryList ? galleryList.querySelectorAll('.gallery_item') : [];
+
+    galleryItems.forEach(function (item, i) {
+      if (i < data.gallery.length) {
+        var g = data.gallery[i];
+
+        if (g.type === 'before_after' && g.before && g.after) {
+          // Update before/after images
+          item.setAttribute('data-gallery-type', 'before_after');
+          var beforeImg = item.querySelector('.gallery_before-img');
+          var afterImg = item.querySelector('.gallery_after-img');
+          if (beforeImg) {
+            beforeImg.setAttribute('referrerpolicy', 'no-referrer');
+            beforeImg.src = g.before;
+            beforeImg.removeAttribute('srcset');
+          }
+          if (afterImg)  {
+            afterImg.setAttribute('referrerpolicy', 'no-referrer');
+            afterImg.src = g.after;
+            afterImg.removeAttribute('srcset');
+          }
+        } else if (g.type === 'photo' && g.url) {
+          // Convert to single photo display
+          item.setAttribute('data-gallery-type', 'photo');
+          var baContainer = item.querySelector('.gallery_before-after');
+          if (baContainer) {
+            baContainer.innerHTML = '<img class="gallery_image" src="' + g.url + '" alt="' + (g.caption || '') + '" style="width:100%;aspect-ratio:4/3;object-fit:cover;" loading="lazy" referrerpolicy="no-referrer"/>';
+          }
+        }
+
+        var captionEl = item.querySelector('.gallery_caption');
+        if (captionEl && g.caption) captionEl.textContent = g.caption;
+      } else {
+        // Hide extra gallery items
+        item.style.display = 'none';
+      }
+    });
+
+    // If we have MORE gallery items than template slots, create new ones
+    if (data.gallery.length > galleryItems.length && galleryList && galleryItems.length > 0) {
+      for (var gi = galleryItems.length; gi < Math.min(data.gallery.length, 9); gi++) {
+        var g = data.gallery[gi];
+        var newItem = document.createElement('div');
+        newItem.className = 'gallery_item';
+        newItem.setAttribute('data-gallery-type', g.type || 'photo');
+
+        if (g.type === 'before_after' && g.before && g.after) {
+          newItem.innerHTML =
+            '<div class="gallery_before-after">' +
+            '<div class="gallery_before"><img class="gallery_image gallery_before-img" src="' + g.before + '" alt="Before" loading="lazy" referrerpolicy="no-referrer"/><span class="gallery_label">Before</span></div>' +
+            '<div class="gallery_after"><img class="gallery_image gallery_after-img" src="' + g.after + '" alt="After" loading="lazy" referrerpolicy="no-referrer"/><span class="gallery_label">After</span></div>' +
+            '<div class="gallery_divider"></div>' +
+            '<div class="gallery_divider-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 4L4 8L8 12" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 4L20 8L16 12" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
+            '</div>' +
+            '<div class="gallery_caption">' + (g.caption || '') + '</div>';
+        } else {
+          newItem.innerHTML =
+            '<div class="gallery_before-after"><img class="gallery_image" src="' + (g.url || '') + '" alt="' + (g.caption || '') + '" style="width:100%;aspect-ratio:4/3;object-fit:cover;" loading="lazy" referrerpolicy="no-referrer"/></div>' +
+            '<div class="gallery_caption">' + (g.caption || '') + '</div>';
+        }
+        galleryList.appendChild(newItem);
+      }
+    }
+  }
+
+  // ── 17. About / Our Story (NEW) ───────────────────────────────────────────
+  // If data.about exists, replace the "Our Story" body text
+
+  if (data.about) {
+    // About page story paragraphs
+    var storyParas = document.querySelectorAll('.about-story_content p, .home-value_header-para .body-text-18px');
+    if (storyParas.length > 0) {
+      var aboutParts = data.about.split('\n\n');
+      storyParas.forEach(function (p, i) {
+        if (aboutParts[i]) p.textContent = aboutParts[i];
+      });
+    }
+  }
+
+  // ── 18. Map embed (NEW) ───────────────────────────────────────────────────
+  // If data.map_embed_url exists, inject a Google Maps iframe
+
+  if (data.map_embed_url) {
+    var mapContainers = document.querySelectorAll('.location_map, [class*="map-embed"], #map-container');
+    mapContainers.forEach(function (container) {
+      var iframe = document.createElement('iframe');
+      iframe.src = data.map_embed_url;
+      iframe.width = '100%';
+      iframe.height = '300';
+      iframe.style.border = 'none';
+      iframe.style.borderRadius = '12px';
+      iframe.loading = 'lazy';
+      iframe.allowFullscreen = true;
+      iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+      container.innerHTML = '';
+      container.appendChild(iframe);
+    });
+  }
+
+  // ── 19. Global "Lumora" → clinic name replacement in all text nodes ────────
   // Catches hardcoded brand name in descriptions, subheadings, paragraphs.
 
   if (data.name && data.name !== 'Lumora Dental') {

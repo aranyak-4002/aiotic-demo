@@ -6,12 +6,15 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && cp -r clinic dist/clinic",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "scrape": "node scraper/pipeline.js",
+    "scrape:sheet": "node scraper/scrape_sheet.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.2",
     "framer-motion": "^11.3.0",
     "lucide-react": "^0.446.0",
+    "playwright": "^1.61.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

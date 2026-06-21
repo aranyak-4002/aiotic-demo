@@ -147,3 +147,8 @@ vite.config.ts.timestamp-*
 
 # Claude
 .claude/
+
+# Scraper temp files
+scraper/tmp/
+scraper/results_*.csv
+scraper/clinic_results.csv
