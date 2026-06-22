@@ -214,6 +214,7 @@ export default function App() {
   const [editing, setEditing] = useState<DemoClient | null | undefined>(undefined)
   const [tab, setTab] = useState<'active' | 'prospects'>('active')
   const [search, setSearch] = useState('')
+  const [regionFilter, setRegionFilter] = useState<'All' | 'Pune' | 'Gujarat'>('All')
   const [copied, setCopied] = useState<string | null>(null)
 
   useEffect(() => {
@@ -236,8 +237,8 @@ export default function App() {
     if (data) {
       const fetchedClients = data as DemoClient[]
       fetchedClients.sort((a, b) => {
-        const orderA = a.data?.sheet_order ?? Infinity
-        const orderB = b.data?.sheet_order ?? Infinity
+        const orderA = Number((a.data as any)?.sheet_order ?? Infinity)
+        const orderB = Number((b.data as any)?.sheet_order ?? Infinity)
         return orderA - orderB
       })
       setClients(fetchedClients)
@@ -272,10 +273,19 @@ export default function App() {
 
   const active = clients.filter(c => c.is_active)
   const prospects = clients.filter(c => !c.is_active)
-  const list = (tab === 'active' ? active : prospects).filter(c =>
+  let list = (tab === 'active' ? active : prospects).filter(c =>
     c.business_name.toLowerCase().includes(search.toLowerCase()) ||
     c.slug.toLowerCase().includes(search.toLowerCase())
   )
+
+  if (regionFilter !== 'All') {
+    list = list.filter(c => {
+      const location = String((c.data as Record<string, unknown>)?.area || (c.data as Record<string, unknown>)?.city || 'Pune').toLowerCase()
+      if (regionFilter === 'Pune') return location.includes('pune')
+      if (regionFilter === 'Gujarat') return location.includes('gujarat') || location.includes('ahmedabad') || location.includes('narol') || location.includes('thaltej')
+      return true
+    })
+  }
 
   return (
     <div style={{ fontFamily: 'Inter,sans-serif', minHeight: '100vh', background: '#f9fafb' }}>
@@ -341,6 +351,15 @@ export default function App() {
             ))}
           </div>
           <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+            <select
+              value={regionFilter}
+              onChange={e => setRegionFilter(e.target.value as any)}
+              style={{ ...inputStyle, width: '130px', marginBottom: 0 }}
+            >
+              <option value="All">All Regions</option>
+              <option value="Pune">Pune</option>
+              <option value="Gujarat">Gujarat</option>
+            </select>
             <input value={search} onChange={e => setSearch(e.target.value)}
               placeholder={tab === 'active' ? 'Search demos…' : 'Search prospects…'}
               style={{ ...inputStyle, maxWidth: '220px', marginBottom: 0 }} />
@@ -378,7 +397,7 @@ export default function App() {
                     </td>
                     <td style={tdStyle}>
                       <span style={{ fontSize: '0.78rem', color: '#6b7280' }}>
-                        {(c.data as Record<string, unknown>)?.area as string || 'Pune'}
+                        {((c.data as Record<string, unknown>)?.area || (c.data as Record<string, unknown>)?.city) as string || 'Pune'}
                       </span>
                     </td>
                     <td style={tdStyle}>
