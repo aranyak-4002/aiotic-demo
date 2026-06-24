@@ -9,7 +9,7 @@ const categories = [
   'Turnkey Design Solutions',
 ]
 
-const images = [
+const defaultImages = [
   'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&auto=format&fit=crop',
   'https://images.unsplash.com/photo-1497366216548-37526070297c?w=500&auto=format&fit=crop',
   'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=500&auto=format&fit=crop',
@@ -23,7 +23,12 @@ const images = [
 
 export default function Portfolio() {
   const [active, setActive] = useState(0)
-  const { } = useDemoParams()
+  const { gallery } = useDemoParams()
+
+  const images = gallery?.length >= 6
+    ? gallery.slice(0, 9).map((g: any) => g.url || g.before)
+    : defaultImages
+
 
   return (
     <section id="portfolio" className="py-24" style={{ background: '#152E29' }}>

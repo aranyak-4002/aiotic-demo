@@ -1,4 +1,6 @@
-const testimonials = [
+import { useDemoParams } from '../useParams'
+
+const defaultTestimonials = [
   { title: 'Seamless From Start to Finish', img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&auto=format&fit=crop', type: 'Residential', quote: 'The team delivered beyond our expectations. Every detail was considered and the execution was flawless.', client: 'Rajesh Kapoor', location: 'Mumbai' },
   { title: 'Design That Truly Reflects Us', img: 'https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=400&auto=format&fit=crop', type: 'Commercial', quote: 'They understood our vision immediately and translated it into a space we are truly proud of.', client: 'Priya Sharma', location: 'Delhi' },
   { title: 'Balanced, Functional, and Elegant', img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&auto=format&fit=crop', type: 'Workspace', quote: 'A perfect balance of aesthetics and functionality. Our workspace has never felt more inspiring.', client: 'Vikram Nair', location: 'Bangalore' },
@@ -8,6 +10,19 @@ const testimonials = [
 ]
 
 export default function Testimonials() {
+  const { testimonials: dynamicTestimonials } = useDemoParams()
+
+  const testimonials = dynamicTestimonials?.length > 0
+    ? dynamicTestimonials.slice(0, 6).map((t: any, i: number) => ({
+        title: t.quote.split('.')[0].slice(0, 40) + '...',
+        img: t.photo || defaultTestimonials[i%6].img,
+        type: 'Interior Design',
+        quote: t.quote,
+        client: t.name,
+        location: t.role || 'India'
+      }))
+    : defaultTestimonials
+
   return (
     <section className="py-24" style={{ background: '#1C3A35' }}>
       <div className="max-w-7xl mx-auto px-8">

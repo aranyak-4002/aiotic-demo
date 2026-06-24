@@ -1,6 +1,6 @@
 import { useDemoParams } from '../useParams'
 
-const images = [
+const defaultImages = [
   { src: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&auto=format&fit=crop', alt: 'Minimal white room' },
   { src: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&auto=format&fit=crop', alt: 'Bedroom interior' },
   { src: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&auto=format&fit=crop', alt: 'Kitchen interior' },
@@ -8,7 +8,12 @@ const images = [
 ]
 
 export default function About() {
-  const { firmName, city, years, projects, cal } = useDemoParams()
+  const { firmName, city, years, projects, cal, gallery } = useDemoParams()
+
+  const images = gallery?.length >= 4
+    ? gallery.slice(0, 4).map((g: any) => ({ src: g.url || g.before, alt: g.caption || 'Interior Photo' }))
+    : defaultImages
+
 
   return (
     <section id="about" className="py-20 bg-white">

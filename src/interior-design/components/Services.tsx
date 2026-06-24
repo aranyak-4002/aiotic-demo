@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { ArrowUpRight } from 'lucide-react'
+import { useDemoParams } from '../useParams'
 
-const services = [
+const defaultServices = [
   {
     num: '01',
     name: 'Consultation',
@@ -30,7 +31,13 @@ const services = [
 ]
 
 export default function Services() {
+  const { services: dynamicServices } = useDemoParams()
   const [open, setOpen] = useState(0)
+
+  // Use dynamic services from Supabase if available, else default
+  const services = dynamicServices?.length > 0 
+    ? dynamicServices.map((s: any, i: number) => ({ num: `0${i+1}`, name: s.name, desc: s.description }))
+    : defaultServices
 
   return (
     <section id="services" className="py-20 bg-[#F8F8F6]">

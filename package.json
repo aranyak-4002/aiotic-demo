@@ -8,7 +8,9 @@
     "build": "vite build && cp -r clinic dist/clinic",
     "preview": "vite preview",
     "scrape": "node scraper/pipeline.js",
-    "scrape:sheet": "node scraper/scrape_sheet.js"
+    "scrape:sheet": "node scraper/scrape_sheet.js",
+    "scrape:interior": "node scraper/pipeline_interior.js --template=interior-design",
+    "scrape:premium": "node scraper/pipeline_interior.js --template=interior-premium"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.2",

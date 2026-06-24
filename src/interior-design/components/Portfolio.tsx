@@ -1,6 +1,7 @@
 import { ArrowUpRight } from 'lucide-react'
+import { useDemoParams } from '../useParams'
 
-const projects = [
+const defaultProjects = [
   {
     img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&auto=format&fit=crop',
     title: 'Comfy Library',
@@ -24,6 +25,11 @@ const projects = [
 ]
 
 export default function Portfolio() {
+  const { gallery } = useDemoParams()
+  const projects = gallery?.length >= 4 
+    ? gallery.slice(0, 4).map((g: any) => ({ img: g.url || g.before, title: g.caption || 'Interior Project', desc: 'A custom designed interior space tailored to the client.' }))
+    : defaultProjects
+
   return (
     <section id="portfolio" className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-6">

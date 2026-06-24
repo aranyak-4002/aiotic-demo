@@ -1,6 +1,6 @@
 import { useDemoParams } from '../useParams'
 
-const services = [
+const defaultServices = [
   {
     num: '01.',
     title: 'Architecture Design',
@@ -31,7 +31,20 @@ const services = [
 ]
 
 export default function Services() {
-  const { } = useDemoParams()
+  const { services: dynamicServices, gallery } = useDemoParams()
+
+  const services = dynamicServices?.length > 0
+    ? dynamicServices.map((s: any, i: number) => ({
+        num: `0${i+1}.`,
+        title: s.name,
+        body: s.description,
+        images: [
+          gallery?.[i * 2]?.url || gallery?.[i * 2]?.before || defaultServices[i%3].images[0],
+          gallery?.[i * 2 + 1]?.url || gallery?.[i * 2 + 1]?.before || defaultServices[i%3].images[1]
+        ]
+      }))
+    : defaultServices
+
 
   return (
     <section id="services" className="py-24 px-6 md:px-10" style={{ background: '#1C3A35' }}>

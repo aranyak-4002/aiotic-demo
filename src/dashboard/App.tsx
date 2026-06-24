@@ -215,6 +215,7 @@ export default function App() {
   const [tab, setTab] = useState<'active' | 'prospects'>('active')
   const [search, setSearch] = useState('')
   const [regionFilter, setRegionFilter] = useState<'All' | 'Pune' | 'Gujarat'>('All')
+  const [categoryFilter, setCategoryFilter] = useState<'Clinics' | 'Interior Designers'>('Clinics')
   const [copied, setCopied] = useState<string | null>(null)
 
   useEffect(() => {
@@ -287,6 +288,17 @@ export default function App() {
     })
   }
 
+  list = list.filter(c => {
+    if (categoryFilter === 'Clinics') return c.template === 'clinic'
+    if (categoryFilter === 'Interior Designers') return c.template === 'interior-design' || c.template === 'interior-premium'
+    return true
+  })
+
+  // Recalculate stats for the selected category
+  const activeCount = active.filter(c => categoryFilter === 'Clinics' ? c.template === 'clinic' : c.template.startsWith('interior')).length
+  const prospectsCount = prospects.filter(c => categoryFilter === 'Clinics' ? c.template === 'clinic' : c.template.startsWith('interior')).length
+  const totalCount = activeCount + prospectsCount
+
   return (
     <div style={{ fontFamily: 'Inter,sans-serif', minHeight: '100vh', background: '#f9fafb' }}>
 
@@ -303,7 +315,36 @@ export default function App() {
         </button>
       </header>
 
-      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem' }}>
+      <div style={{ display: 'flex', maxWidth: '1200px', margin: '0 auto' }}>
+        <aside style={{ width: '240px', padding: '2rem 1.5rem 2rem 0', borderRight: '1px solid #e5e7eb' }}>
+          <div style={{ fontWeight: 600, fontSize: '0.8rem', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '1rem', paddingLeft: '0.75rem' }}>
+            Categories
+          </div>
+          <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+            {(['Clinics', 'Interior Designers'] as const).map(cat => (
+              <button
+                key={cat}
+                onClick={() => setCategoryFilter(cat)}
+                style={{
+                  textAlign: 'left',
+                  padding: '0.5rem 0.75rem',
+                  borderRadius: '6px',
+                  background: categoryFilter === cat ? '#f3f4f6' : 'transparent',
+                  color: categoryFilter === cat ? '#0a0a0a' : '#6b7280',
+                  fontWeight: categoryFilter === cat ? 600 : 500,
+                  fontSize: '0.9rem',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}
+              >
+                {cat}
+              </button>
+            ))}
+          </nav>
+        </aside>
+
+        <main style={{ flex: 1, padding: '2rem' }}>
 
         {/* Add / Edit panel */}
         {editing !== undefined && (
@@ -322,9 +363,9 @@ export default function App() {
         {/* Stats row */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginBottom: '1.5rem' }}>
           {[
-            { label: 'Active Demos', value: active.length, color: '#16a34a' },
-            { label: 'Prospects', value: prospects.length, color: '#6b7280' },
-            { label: 'Total', value: clients.length, color: '#0a0a0a' },
+            { label: 'Active Demos', value: activeCount, color: '#16a34a' },
+            { label: 'Prospects', value: prospectsCount, color: '#6b7280' },
+            { label: 'Total', value: totalCount, color: '#0a0a0a' },
           ].map(s => (
             <div key={s.label} style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: '10px', padding: '1rem 1.25rem' }}>
               <div style={{ fontSize: '1.6rem', fontWeight: 700, color: s.color, letterSpacing: '-0.03em' }}>{s.value}</div>
@@ -346,7 +387,7 @@ export default function App() {
                   borderRadius: t === 'active' ? '8px 0 0 8px' : '0 8px 8px 0',
                   borderRight: t === 'active' ? 'none' : '1px solid #e5e7eb',
                 }}>
-                {t === 'active' ? `Active Demos (${active.length})` : `Prospects (${prospects.length})`}
+                {t === 'active' ? `Active Demos (${activeCount})` : `Prospects (${prospectsCount})`}
               </button>
             ))}
           </div>
@@ -404,7 +445,7 @@ export default function App() {
                       {tab === 'active' ? (
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                           <code style={{ fontSize: '0.72rem', color: '#14532d', background: '#f0fdf4', padding: '2px 6px', borderRadius: '4px', maxWidth: '240px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}>
-                            {`/clinic/?client=${c.slug}`}
+                            {`/${c.template}/?client=${c.slug}`}
                           </code>
                         </div>
                       ) : (
@@ -451,9 +492,10 @@ export default function App() {
           )}
         </div>
         <p style={{ marginTop: '0.75rem', fontSize: '0.75rem', color: '#9ca3af' }}>
-          {list.length} shown · {clients.length} total records
+          {list.length} shown · {totalCount} total records in {categoryFilter}
         </p>
-      </main>
+        </main>
+      </div>
     </div>
   )
 }
